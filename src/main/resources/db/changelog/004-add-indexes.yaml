@@ -1,0 +1,158 @@
+databaseChangeLog:
+  # Index sur colis.statut (recherches fréquentes par statut)
+  - changeSet:
+      id: 004-add-index-colis-statut
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_colis_statut
+            tableName: colis
+            columns:
+              - column:
+                  name: statut
+
+  # Index sur colis.priorite (recherches par priorité)
+  - changeSet:
+      id: 004-add-index-colis-priorite
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_colis_priorite
+            tableName: colis
+            columns:
+              - column:
+                  name: priorite
+
+  # Index sur colis.ville_destination (regroupement par ville)
+  - changeSet:
+      id: 004-add-index-colis-ville
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_colis_ville_destination
+            tableName: colis
+            columns:
+              - column:
+                  name: ville_destination
+
+  # Index sur colis.numero_suivi (recherche par numéro)
+  - changeSet:
+      id: 004-add-index-colis-numero
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_colis_numero_suivi
+            tableName: colis
+            columns:
+              - column:
+                  name: numero_suivi
+
+  # Index sur colis.date_creation (tri chronologique)
+  - changeSet:
+      id: 004-add-index-colis-date-creation
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_colis_date_creation
+            tableName: colis
+            columns:
+              - column:
+                  name: date_creation
+
+  # Index sur colis.livreur_id (recherches par livreur)
+  - changeSet:
+      id: 004-add-index-colis-livreur
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_colis_livreur
+            tableName: colis
+            columns:
+              - column:
+                  name: livreur_id
+
+  # Index sur colis.zone_id (recherches par zone)
+  - changeSet:
+      id: 004-add-index-colis-zone
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_colis_zone
+            tableName: colis
+            columns:
+              - column:
+                  name: zone_id
+
+  # Index sur colis.client_expediteur_id (recherches par client)
+  - changeSet:
+      id: 004-add-index-colis-client
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_colis_client_expediteur
+            tableName: colis
+            columns:
+              - column:
+                  name: client_expediteur_id
+
+  # Index sur historique_livraison.colis_id (historique par colis)
+  - changeSet:
+      id: 004-add-index-historique-colis
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_historique_colis
+            tableName: historique_livraison
+            columns:
+              - column:
+                  name: colis_id
+
+  # Index sur historique_livraison.date_changement (tri chronologique)
+  - changeSet:
+      id: 004-add-index-historique-date
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_historique_date
+            tableName: historique_livraison
+            columns:
+              - column:
+                  name: date_changement
+
+  # Index sur client_expediteur.email (recherche par email)
+  - changeSet:
+      id: 004-add-index-client-email
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_client_email
+            tableName: client_expediteur
+            columns:
+              - column:
+                  name: email
+
+  # Index sur livreur.telephone (recherche par téléphone)
+  - changeSet:
+      id: 004-add-index-livreur-telephone
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_livreur_telephone
+            tableName: livreur
+            columns:
+              - column:
+                  name: telephone
+
+  # Index composé sur colis_produit (colis_id + produit_id)
+  - changeSet:
+      id: 004-add-index-colis-produit-composite
+      author: smartlogi
+      changes:
+        - createIndex:
+            indexName: idx_colis_produit_composite
+            tableName: colis_produit
+            columns:
+              - column:
+                  name: colis_id
+              - column:
+                  name: produit_id

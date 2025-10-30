@@ -1,0 +1,147 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-insert-zones
+      author: smartlogi
+      changes:
+        - insert:
+            tableName: zone
+            columns:
+              - column: {name: nom, value: "Casablanca Centre"}
+              - column: {name: code_postal, value: "20000"}
+              - column: {name: ville, value: "Casablanca"}
+        - insert:
+            tableName: zone
+            columns:
+              - column: {name: nom, value: "Rabat Agdal"}
+              - column: {name: code_postal, value: "10000"}
+              - column: {name: ville, value: "Rabat"}
+        - insert:
+            tableName: zone
+            columns:
+              - column: {name: nom, value: "Marrakech Médina"}
+              - column: {name: code_postal, value: "40000"}
+              - column: {name: ville, value: "Marrakech"}
+        - insert:
+            tableName: zone
+            columns:
+              - column: {name: nom, value: "Tanger Centre"}
+              - column: {name: code_postal, value: "90000"}
+              - column: {name: ville, value: "Tanger"}
+        - insert:
+            tableName: zone
+            columns:
+              - column: {name: nom, value: "Fès Médina"}
+              - column: {name: code_postal, value: "30000"}
+              - column: {name: ville, value: "Fès"}
+
+  # ====================================
+  # DONNÉES INITIALES : LIVREURS
+  # ====================================
+  - changeSet:
+      id: 003-insert-livreurs
+      author: smartlogi
+      changes:
+        - insert:
+            tableName: livreur
+            columns:
+              - column: {name: nom, value: "Alami"}
+              - column: {name: prenom, value: "Mohammed"}
+              - column: {name: telephone, value: "0612345678"}
+              - column: {name: vehicule, value: "CAMIONNETTE"}
+              - column: {name: zone_assignee_id, valueNumeric: 1}
+              - column: {name: actif, valueBoolean: true}
+        - insert:
+            tableName: livreur
+            columns:
+              - column: {name: nom, value: "Benali"}
+              - column: {name: prenom, value: "Fatima"}
+              - column: {name: telephone, value: "0623456789"}
+              - column: {name: vehicule, value: "VOITURE"}
+              - column: {name: zone_assignee_id, valueNumeric: 2}
+              - column: {name: actif, valueBoolean: true}
+        - insert:
+            tableName: livreur
+            columns:
+              - column: {name: nom, value: "Chakir"}
+              - column: {name: prenom, value: "Youssef"}
+              - column: {name: telephone, value: "0634567890"}
+              - column: {name: vehicule, value: "MOTO"}
+              - column: {name: zone_assignee_id, valueNumeric: 3}
+              - column: {name: actif, valueBoolean: true}
+
+  # ====================================
+  # DONNÉES INITIALES : CLIENTS EXPÉDITEURS
+  # ====================================
+  - changeSet:
+      id: 003-insert-clients
+      author: smartlogi
+      changes:
+        - insert:
+            tableName: client_expediteur
+            columns:
+              - column: {name: nom, value: "Entreprise Tech"}
+              - column: {name: prenom, value: "Directeur"}
+              - column: {name: email, value: "contact@tech.ma"}
+              - column: {name: telephone, value: "0522123456"}
+              - column: {name: adresse, value: "Boulevard Zerktouni, Casablanca"}
+        - insert:
+            tableName: client_expediteur
+            columns:
+              - column: {name: nom, value: "Boutique Mode"}
+              - column: {name: prenom, value: "Responsable"}
+              - column: {name: email, value: "mode@boutique.ma"}
+              - column: {name: telephone, value: "0537234567"}
+              - column: {name: adresse, value: "Avenue Mohammed V, Rabat"}
+
+  # ====================================
+  # DONNÉES INITIALES : DESTINATAIRES
+  # ====================================
+  - changeSet:
+      id: 003-insert-destinataires
+      author: smartlogi
+      changes:
+        - insert:
+            tableName: destinataire
+            columns:
+              - column: {name: nom, value: "Idrissi"}
+              - column: {name: prenom, value: "Sara"}
+              - column: {name: email, value: "sara.idrissi@email.ma"}
+              - column: {name: telephone, value: "0645678901"}
+              - column: {name: adresse, value: "Quartier Maarif, Casablanca"}
+        - insert:
+            tableName: destinataire
+            columns:
+              - column: {name: nom, value: "Tazi"}
+              - column: {name: prenom, value: "Karim"}
+              - column: {name: email, value: "karim.tazi@email.ma"}
+              - column: {name: telephone, value: "0656789012"}
+              - column: {name: adresse, value: "Hay Riad, Rabat"}
+
+  # ====================================
+  # DONNÉES INITIALES : PRODUITS
+  # ====================================
+  - changeSet:
+      id: 003-insert-produits
+      author: smartlogi
+      changes:
+        - insert:
+            tableName: produit
+            columns:
+              - column: {name: nom, value: "Ordinateur Portable Dell"}
+              - column: {name: categorie, value: "Électronique"}
+              - column: {name: poids, valueNumeric: 2.5}
+              - column: {name: prix, valueNumeric: 8500.00}
+        - insert:
+            tableName: produit
+            columns:
+              - column: {name: nom, value: "Chaussures Nike"}
+              - column: {name: categorie, value: "Mode"}
+              - column: {name: poids, valueNumeric: 0.8}
+              - column: {name: prix, valueNumeric: 850.00}
+        - insert:
+            tableName: produit
+            columns:
+              - column: {name: nom, value: "Livre 'Le Petit Prince'"}
+              - column: {name: categorie, value: "Livres"}
+              - column: {name: poids, valueNumeric: 0.3}
+              - column: {name: prix, valueNumeric: 120.00}

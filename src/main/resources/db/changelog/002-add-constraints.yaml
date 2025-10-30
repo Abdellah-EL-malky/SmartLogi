@@ -1,0 +1,112 @@
+databaseChangeLog:
+  # FK: livreur -> zone
+  - changeSet:
+      id: 002-add-fk-livreur-zone
+      author: smartlogi
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: livreur
+            baseColumnNames: zone_assignee_id
+            constraintName: fk_livreur_zone
+            referencedTableName: zone
+            referencedColumnNames: id
+            onDelete: SET NULL
+            onUpdate: CASCADE
+
+  # FK: colis -> client_expediteur
+  - changeSet:
+      id: 002-add-fk-colis-client
+      author: smartlogi
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: colis
+            baseColumnNames: client_expediteur_id
+            constraintName: fk_colis_client_expediteur
+            referencedTableName: client_expediteur
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+  # FK: colis -> destinataire
+  - changeSet:
+      id: 002-add-fk-colis-destinataire
+      author: smartlogi
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: colis
+            baseColumnNames: destinataire_id
+            constraintName: fk_colis_destinataire
+            referencedTableName: destinataire
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+  # FK: colis -> livreur
+  - changeSet:
+      id: 002-add-fk-colis-livreur
+      author: smartlogi
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: colis
+            baseColumnNames: livreur_id
+            constraintName: fk_colis_livreur
+            referencedTableName: livreur
+            referencedColumnNames: id
+            onDelete: SET NULL
+            onUpdate: CASCADE
+
+  # FK: colis -> zone
+  - changeSet:
+      id: 002-add-fk-colis-zone
+      author: smartlogi
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: colis
+            baseColumnNames: zone_id
+            constraintName: fk_colis_zone
+            referencedTableName: zone
+            referencedColumnNames: id
+            onDelete: RESTRICT
+            onUpdate: CASCADE
+
+  # FK: colis_produit -> colis
+  - changeSet:
+      id: 002-add-fk-colis-produit-colis
+      author: smartlogi
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: colis_produit
+            baseColumnNames: colis_id
+            constraintName: fk_colis_produit_colis
+            referencedTableName: colis
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+  # FK: colis_produit -> produit
+  - changeSet:
+      id: 002-add-fk-colis-produit-produit
+      author: smartlogi
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: colis_produit
+            baseColumnNames: produit_id
+            constraintName: fk_colis_produit_produit
+            referencedTableName: produit
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+  # FK: historique_livraison -> colis
+  - changeSet:
+      id: 002-add-fk-historique-colis
+      author: smartlogi
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: historique_livraison
+            baseColumnNames: colis_id
+            constraintName: fk_historique_colis
+            referencedTableName: colis
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
