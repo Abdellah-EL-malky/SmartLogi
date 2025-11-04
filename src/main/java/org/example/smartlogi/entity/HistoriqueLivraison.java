@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.intellidrop_v2.enums.StatutColis;
+import org.example.smartlogi.enums.StatutColis;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
