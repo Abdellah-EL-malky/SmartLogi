@@ -50,9 +50,6 @@ public class ClientExpediteurController {
         return ResponseEntity.ok(page);
     }
 
-    /**
-     * Mettre à jour un client existant
-     */
     @PutMapping("/{id}")
     @Operation(summary = "Modifier un client", description = "Mettre à jour les informations d'un client expéditeur")
     public ResponseEntity<ClientExpediteurDTO> update(
