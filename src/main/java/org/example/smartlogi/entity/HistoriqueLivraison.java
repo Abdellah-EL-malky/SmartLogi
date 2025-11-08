@@ -37,4 +37,5 @@ public class HistoriqueLivraison {
 
     @Column(name = "utilisateur", length = 100)
     private String utilisateur;
+
 }

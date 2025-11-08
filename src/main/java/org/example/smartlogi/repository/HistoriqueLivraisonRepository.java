@@ -11,16 +11,23 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Repository pour l'entité HistoriqueLivraison
+ */
 @Repository
 public interface HistoriqueLivraisonRepository extends JpaRepository<HistoriqueLivraison, Long> {
 
     List<HistoriqueLivraison> findByColisOrderByDateChangementAsc(Colis colis);
 
+    List<HistoriqueLivraison> findByColisOrderByDateChangementDesc(Colis colis);
+
     List<HistoriqueLivraison> findByColisAndStatut(Colis colis, StatutColis statut);
 
-    List<HistoriqueLivraison> findByUtilisateur(String utilisateur);
+    List<HistoriqueLivraison> findByStatut(StatutColis statut);
 
     List<HistoriqueLivraison> findByDateChangementBetween(LocalDateTime startDate, LocalDateTime endDate);
+
+    Long countByColis(Colis colis);
 
     @Query("SELECT h FROM HistoriqueLivraison h WHERE h.colis = :colis ORDER BY h.dateChangement DESC")
     List<HistoriqueLivraison> findDernierChangement(@Param("colis") Colis colis);

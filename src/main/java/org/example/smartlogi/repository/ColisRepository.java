@@ -15,10 +15,19 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository pour l'entité Colis
+ */
 @Repository
 public interface ColisRepository extends JpaRepository<Colis, Long> {
 
+    // ========================================
+    // RECHERCHES SIMPLES
+    // ========================================
+
     Optional<Colis> findByNumeroSuivi(String numeroSuivi);
+
+    boolean existsByNumeroSuivi(String numeroSuivi);
 
     List<Colis> findByStatut(StatutColis statut);
 
@@ -26,13 +35,23 @@ public interface ColisRepository extends JpaRepository<Colis, Long> {
 
     List<Colis> findByVilleDestination(String villeDestination);
 
+    // ========================================
+    // RECHERCHES PAR RELATIONS
+    // ========================================
+
     List<Colis> findByClientExpediteur(ClientExpediteur clientExpediteur);
 
     List<Colis> findByDestinataire(Destinataire destinataire);
 
     List<Colis> findByLivreur(Livreur livreur);
 
+    List<Colis> findByLivreurIsNull();
+
     List<Colis> findByZone(Zone zone);
+
+    // ========================================
+    // RECHERCHES COMBINÉES
+    // ========================================
 
     List<Colis> findByStatutAndZone(StatutColis statut, Zone zone);
 
@@ -42,11 +61,27 @@ public interface ColisRepository extends JpaRepository<Colis, Long> {
 
     List<Colis> findByZoneAndPriorite(Zone zone, PrioriteColis priorite);
 
+    // ========================================
+    // RECHERCHES PAR DATE
+    // ========================================
+
+    List<Colis> findByDateLivraisonPrevueBefore(LocalDateTime date);
+
+    List<Colis> findByDateCreationBetween(LocalDateTime startDate, LocalDateTime endDate);
+
+    // ========================================
+    // PAGINATION
+    // ========================================
+
     Page<Colis> findByStatut(StatutColis statut, Pageable pageable);
 
     Page<Colis> findByZone(Zone zone, Pageable pageable);
 
     Page<Colis> findByClientExpediteur(ClientExpediteur clientExpediteur, Pageable pageable);
+
+    // ========================================
+    // QUERIES PERSONNALISÉES
+    // ========================================
 
     @Query("SELECT c FROM Colis c WHERE c.dateLivraisonPrevue < :now AND c.statut <> 'LIVRE'")
     List<Colis> findColisEnRetard(@Param("now") LocalDateTime now);
@@ -68,6 +103,9 @@ public interface ColisRepository extends JpaRepository<Colis, Long> {
 
     Long countByStatutAndZone(StatutColis statut, Zone zone);
 
+    @Query("SELECT c FROM Colis c WHERE c.livreur = :livreur AND c.statut IN ('EN_TRANSIT', 'CREE')")
+    List<Colis> findColisEnCoursLivraison(@Param("livreur") Livreur livreur);
+
     @Query("SELECT c FROM Colis c WHERE " +
             "LOWER(c.numeroSuivi) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(c.description) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
@@ -79,6 +117,4 @@ public interface ColisRepository extends JpaRepository<Colis, Long> {
             "LOWER(c.description) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(c.villeDestination) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     Page<Colis> rechercherParMotCle(@Param("keyword") String keyword, Pageable pageable);
-
-    List<Colis> findByDateCreationBetween(LocalDateTime startDate, LocalDateTime endDate);
 }
