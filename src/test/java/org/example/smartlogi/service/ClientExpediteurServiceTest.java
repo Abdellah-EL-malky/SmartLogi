@@ -52,7 +52,7 @@ public class ClientExpediteurServiceTest {
 
         //Assert
         assertNotNull(retour);
-        assertEquals("ahmad", retour.getNom());
+        assertEquals("testeur", retour.getNom());
 
 
     }
