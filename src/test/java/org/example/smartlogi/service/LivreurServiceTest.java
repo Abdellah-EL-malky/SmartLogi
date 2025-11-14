@@ -1,4 +1,4 @@
 package org.example.smartlogi.service;
 
-public class RechercheService {
+public class LivreurServiceTest {
 }

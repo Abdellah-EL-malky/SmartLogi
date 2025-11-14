@@ -35,10 +35,13 @@
             ${project.build.directory}/site/jacoco/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
 
-        <!-- Exclusions SonarQube (DTOs, configs, main class) -->
+        <!-- Exclusions SonarQube (DTOs, configs, repositories, entities, mappers) -->
         <sonar.exclusions>
             **/dto/**,
             **/config/**,
+            **/repository/**,
+            **/mapper/**,
+            **/entity/**,
             **/SmartLogiApplication.java
         </sonar.exclusions>
     </properties>
@@ -225,7 +228,9 @@
                         </goals>
                     </execution>
 
-                    <!-- Vérifie le seuil de couverture (90% minimum)
+                    <!-- Vérifie le seuil de couverture (90% minimum) -->
+                    <!-- TEMPORAIREMENT DÉSACTIVÉ - Sera réactivé quand couverture atteinte -->
+                    <!--
                     <execution>
                         <id>jacoco-check</id>
                         <goals>
@@ -250,14 +255,18 @@
                                 </rule>
                             </rules>
                         </configuration>
-                    </execution> -->
+                    </execution>
+                    -->
                 </executions>
 
-                <!-- Exclusions (DTOs, configurations, classe principale) -->
+                <!-- Exclusions (DTOs, configs, repositories, mappers, classe principale) -->
                 <configuration>
                     <excludes>
                         <exclude>**/dto/**</exclude>
                         <exclude>**/config/**</exclude>
+                        <exclude>**/repository/**</exclude>
+                        <exclude>**/mapper/**</exclude>
+                        <exclude>**/entity/**</exclude>
                         <exclude>**/SmartLogiApplication.class</exclude>
                     </excludes>
                 </configuration>

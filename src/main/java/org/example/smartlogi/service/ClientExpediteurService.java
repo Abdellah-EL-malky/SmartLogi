@@ -151,4 +151,5 @@ public class ClientExpediteurService {
     public boolean emailExists(String email) {
         return clientExpediteurRepository.existsByEmail(email);
     }
+
 }

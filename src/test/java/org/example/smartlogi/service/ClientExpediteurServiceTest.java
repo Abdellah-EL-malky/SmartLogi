@@ -33,10 +33,10 @@ public class ClientExpediteurServiceTest {
 
         dtoRequest = new ClientExpediteurDTO();
 
-        dtoRequest.setEmail("hamada@tete.com");
+        dtoRequest.setEmail("testeur@test.com");
         dtoRequest.setAdresse("youcode");
-        dtoRequest.setNom("ahmad");
-        dtoRequest.setPrenom("tawdi");
+        dtoRequest.setNom("testeur");
+        dtoRequest.setPrenom("test");
         dtoRequest.setTelephone("0616262738");
 
     }
@@ -44,7 +44,7 @@ public class ClientExpediteurServiceTest {
     @Test
     public void createClient_withSuccess(){
         //Arrange
-        when(clientExpediteurRepository.existsByEmail("hamada@tete.com")).thenReturn(false);
+        when(clientExpediteurRepository.existsByEmail("testeur@test.com")).thenReturn(false);
         when(clientExpediteurRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
 
         //Act
