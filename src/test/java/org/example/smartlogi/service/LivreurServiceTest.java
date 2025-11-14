@@ -44,7 +44,6 @@ public class LivreurServiceTest {
     void setup() {
         livreurService = new LivreurService(livreurRepository, zoneRepository, livreurMapper);
 
-        // Créer une zone pour les tests
         zoneTest = new Zone();
         zoneTest.setId(1L);
         zoneTest.setNom("Zone Nord");
