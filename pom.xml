@@ -27,9 +27,10 @@
         <!-- ========================================= -->
         <!-- SONARQUBE PROPERTIES -->
         <!-- ========================================= -->
-        <sonar.projectKey>smartlogi-intellidrop-v2</sonar.projectKey>
+        <sonar.organization>abdellah-el-malky</sonar.organization>
+        <sonar.projectKey>Abdellah_SmartLogi</sonar.projectKey>
         <sonar.projectName>IntelliDrop V2 - Smart Delivery Management System</sonar.projectName>
-        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.coverage.jacoco.xmlReportPaths>
             ${project.build.directory}/site/jacoco/jacoco.xml
