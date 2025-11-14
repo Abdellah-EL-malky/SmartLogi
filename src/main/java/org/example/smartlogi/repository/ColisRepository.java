@@ -15,15 +15,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Repository pour l'entité Colis
- */
 @Repository
 public interface ColisRepository extends JpaRepository<Colis, Long> {
-
-    // ========================================
-    // RECHERCHES SIMPLES
-    // ========================================
 
     Optional<Colis> findByNumeroSuivi(String numeroSuivi);
 

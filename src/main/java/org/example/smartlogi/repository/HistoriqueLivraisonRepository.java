@@ -11,9 +11,6 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * Repository pour l'entité HistoriqueLivraison
- */
 @Repository
 public interface HistoriqueLivraisonRepository extends JpaRepository<HistoriqueLivraison, Long> {
 
