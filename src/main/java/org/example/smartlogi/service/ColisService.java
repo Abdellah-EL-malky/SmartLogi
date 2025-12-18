@@ -236,5 +236,44 @@ public class ColisService {
         historiqueLivraisonRepository.save(historique);
     }
 
-    //
+    @Transactional(readOnly = true)
+    public List<ColisDTO> findByLivreurUsername(String username) {
+        return colisRepository.findAll()
+                .stream()
+                .filter(colis -> colis.getLivreur() != null &&
+                        colis.getLivreur().getTelephone().equals(username))
+                .map(colisMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ColisDTO> findByClientUsername(String username) {
+        return colisRepository.findAll()
+                .stream()
+                .filter(colis -> colis.getClientExpediteur() != null &&
+                        colis.getClientExpediteur().getEmail().equals(username))
+                .map(colisMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public boolean isAssignedToDeliveryPerson(Long colisId, String username) {
+        return colisRepository.findById(colisId)
+                .map(colis -> colis.getLivreur() != null &&
+                        colis.getLivreur().getTelephone().equals(username))
+                .orElse(false);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean belongsToClient(Long colisId, String username) {
+        return colisRepository.findById(colisId)
+                .map(colis -> colis.getClientExpediteur() != null &&
+                        colis.getClientExpediteur().getEmail().equals(username))
+                .orElse(false);
+    }
+
+    @Transactional
+    public ColisDTO updateStatut(Long id, String statut) {
+        return changerStatut(id, statut, null);
+    }
 }

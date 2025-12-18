@@ -1,6 +1,6 @@
 databaseChangeLog:
       - changeSet:
-          id: 004-create-users-table
+          id: 005-create-users-table
           author: abdellah
           changes:
             - createTable:
@@ -63,7 +63,7 @@ databaseChangeLog:
                       type: TIMESTAMP
 
       - changeSet:
-          id: 004-insert-default-users
+          id: 005-insert-default-users
           author: abdellah
           changes:
             - insert:
