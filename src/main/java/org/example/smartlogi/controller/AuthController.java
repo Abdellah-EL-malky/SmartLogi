@@ -67,6 +67,9 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) {
         try {
+            Role role = roleRepository.findByName(registerRequest.getRole())
+                    .orElseThrow(() -> new RuntimeException("Role not found: " + registerRequest.getRole()));
+
             User user = new User();
             user.setUsername(registerRequest.getUsername());
             user.setPassword(registerRequest.getPassword());
@@ -75,7 +78,7 @@ public class AuthController {
             user.setPrenom(registerRequest.getPrenom());
             user.setTelephone(registerRequest.getTelephone());
             user.setAdresse(registerRequest.getAdresse());
-            user.setRole(UserRole.valueOf(registerRequest.getRole()));
+            user.setRole(role);
             user.setEnabled(true);
 
             User createdUser = userService.createUser(user);

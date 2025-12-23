@@ -67,10 +67,8 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
 
-        // Ajouter le rôle
         authorities.add(new SimpleGrantedAuthority(role.getName()));
 
-        // Ajouter toutes les permissions du rôle
         role.getPermissions().forEach(permission ->
                 authorities.add(new SimpleGrantedAuthority(permission.getName()))
         );

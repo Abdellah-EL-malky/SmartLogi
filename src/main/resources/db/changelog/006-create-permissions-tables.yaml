@@ -1,0 +1,292 @@
+databaseChangeLog:
+  # Créer la table permissions
+  - changeSet:
+      id: 006-1-create-permissions-table
+      author: abdellah
+      changes:
+        - createTable:
+            tableName: permissions
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: description
+                  type: VARCHAR(500)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+  # Créer la table roles
+  - changeSet:
+      id: 006-2-create-roles-table
+      author: abdellah
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: description
+                  type: VARCHAR(500)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+  # Créer la table de liaison role_permissions
+  - changeSet:
+      id: 006-3-create-role-permissions-table
+      author: abdellah
+      changes:
+        - createTable:
+            tableName: role_permissions
+            columns:
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: permission_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: role_permissions
+            columnNames: role_id, permission_id
+            constraintName: pk_role_permissions
+        - addForeignKeyConstraint:
+            baseTableName: role_permissions
+            baseColumnNames: role_id
+            constraintName: fk_role_permissions_role
+            referencedTableName: roles
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: role_permissions
+            baseColumnNames: permission_id
+            constraintName: fk_role_permissions_permission
+            referencedTableName: permissions
+            referencedColumnNames: id
+            onDelete: CASCADE
+
+  # Insérer les 3 rôles de base
+  - changeSet:
+      id: 006-4-insert-default-roles
+      author: abdellah
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column: {name: name, value: "ROLE_MANAGER"}
+              - column: {name: description, value: "Gestionnaire avec accès complet"}
+        - insert:
+            tableName: roles
+            columns:
+              - column: {name: name, value: "ROLE_DELIVERY_PERSON"}
+              - column: {name: description, value: "Livreur avec accès limité"}
+        - insert:
+            tableName: roles
+            columns:
+              - column: {name: name, value: "ROLE_CLIENT"}
+              - column: {name: description, value: "Client expéditeur"}
+
+  # Insérer les permissions de base
+  - changeSet:
+      id: 006-5-insert-default-permissions
+      author: abdellah
+      changes:
+        # Permissions COLIS
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "COLIS_CREATE"}
+              - column: {name: description, value: "Créer un colis"}
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "COLIS_READ"}
+              - column: {name: description, value: "Consulter les colis"}
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "COLIS_UPDATE"}
+              - column: {name: description, value: "Modifier un colis"}
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "COLIS_DELETE"}
+              - column: {name: description, value: "Supprimer un colis"}
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "COLIS_UPDATE_STATUS"}
+              - column: {name: description, value: "Changer le statut d'un colis"}
+
+        # Permissions LIVREUR
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "LIVREUR_READ"}
+              - column: {name: description, value: "Consulter les livreurs"}
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "LIVREUR_MANAGE"}
+              - column: {name: description, value: "Gérer les livreurs"}
+
+        # Permissions ZONE
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "ZONE_READ"}
+              - column: {name: description, value: "Consulter les zones"}
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "ZONE_MANAGE"}
+              - column: {name: description, value: "Gérer les zones"}
+
+        # Permissions CLIENT
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "CLIENT_READ"}
+              - column: {name: description, value: "Consulter les clients"}
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "CLIENT_MANAGE"}
+              - column: {name: description, value: "Gérer les clients"}
+
+        # Permissions PRODUIT
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "PRODUIT_READ"}
+              - column: {name: description, value: "Consulter les produits"}
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "PRODUIT_MANAGE"}
+              - column: {name: description, value: "Gérer les produits"}
+
+        # Permissions STATS
+        - insert:
+            tableName: permissions
+            columns:
+              - column: {name: name, value: "STATS_VIEW"}
+              - column: {name: description, value: "Voir les statistiques"}
+
+  # Assigner toutes les permissions au ROLE_MANAGER
+  - changeSet:
+      id: 006-6-assign-permissions-to-manager
+      author: abdellah
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO role_permissions (role_id, permission_id)
+              SELECT r.id, p.id
+              FROM roles r
+              CROSS JOIN permissions p
+              WHERE r.name = 'ROLE_MANAGER';
+
+  # Assigner permissions limitées au ROLE_DELIVERY_PERSON
+  - changeSet:
+      id: 006-7-assign-permissions-to-delivery-person
+      author: abdellah
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO role_permissions (role_id, permission_id)
+              SELECT r.id, p.id
+              FROM roles r, permissions p
+              WHERE r.name = 'ROLE_DELIVERY_PERSON'
+              AND p.name IN ('COLIS_READ', 'COLIS_UPDATE_STATUS');
+
+  # Assigner permissions limitées au ROLE_CLIENT
+  - changeSet:
+      id: 006-8-assign-permissions-to-client
+      author: abdellah
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO role_permissions (role_id, permission_id)
+              SELECT r.id, p.id
+              FROM roles r, permissions p
+              WHERE r.name = 'ROLE_CLIENT'
+              AND p.name IN ('COLIS_CREATE', 'COLIS_READ', 'PRODUIT_READ');
+
+  # Modifier la table users pour utiliser role_id au lieu de role
+  - changeSet:
+      id: 006-9-add-role-id-to-users
+      author: abdellah
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: role_id
+                  type: BIGINT
+        - addForeignKeyConstraint:
+            baseTableName: users
+            baseColumnNames: role_id
+            constraintName: fk_users_role
+            referencedTableName: roles
+            referencedColumnNames: id
+
+  # Migrer les données existantes de role (STRING) vers role_id
+  - changeSet:
+      id: 006-10-migrate-user-roles
+      author: abdellah
+      changes:
+        - sql:
+            sql: |
+              UPDATE users SET role_id = (SELECT id FROM roles WHERE name = users.role);
+
+  # Rendre role_id obligatoire
+  - changeSet:
+      id: 006-11-make-role-id-not-null
+      author: abdellah
+      changes:
+        - addNotNullConstraint:
+            tableName: users
+            columnName: role_id
+            columnDataType: BIGINT
+
+  # Supprimer l'ancienne colonne role (optionnel, ou la garder pour backup)
+  - changeSet:
+      id: 006-12-drop-old-role-column
+      author: abdellah
+      changes:
+        - dropColumn:
+            tableName: users
+            columnName: role

@@ -9,3 +9,5 @@ databaseChangeLog:
       file: db/changelog/004-add-indexes.yaml
   - include:
       file: db/changelog/005-add-user-authentication.yaml
+  - include:
+      file: db/changelog/006-create-permissions-tables.yaml
