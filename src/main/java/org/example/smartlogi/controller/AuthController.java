@@ -5,8 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.smartlogi.dto.AuthResponse;
 import org.example.smartlogi.dto.LoginRequest;
 import org.example.smartlogi.dto.RegisterRequest;
+import org.example.smartlogi.entity.Role;
 import org.example.smartlogi.entity.User;
-import org.example.smartlogi.enums.UserRole;
+import org.example.smartlogi.repository.RoleRepository;
 import org.example.smartlogi.security.jwt.JwtUtil;
 import org.example.smartlogi.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +27,7 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     private final UserService userService;
+    private final RoleRepository roleRepository;
 
     @Value("${jwt.expiration}")
     private Long jwtExpiration;
@@ -67,6 +69,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) {
         try {
+            // Trouver le rôle par son nom
             Role role = roleRepository.findByName(registerRequest.getRole())
                     .orElseThrow(() -> new RuntimeException("Role not found: " + registerRequest.getRole()));
 

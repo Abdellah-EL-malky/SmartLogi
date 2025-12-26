@@ -1,0 +1,229 @@
+databaseChangeLog:
+  # Insérer des zones de test
+  - changeSet:
+      id: 007-1-insert-test-zones
+      author: abdellah
+      changes:
+        - insert:
+            tableName: zone
+            columns:
+              - column: {name: nom, value: "Zone Centre"}
+              - column: {name: ville, value: "Casablanca"}
+              - column: {name: code_postal, value: "20000"}
+        - insert:
+            tableName: zone
+            columns:
+              - column: {name: nom, value: "Zone Ain Sebaa"}
+              - column: {name: ville, value: "Casablanca"}
+              - column: {name: code_postal, value: "20250"}
+        - insert:
+            tableName: zone
+            columns:
+              - column: {name: nom, value: "Zone Maarif"}
+              - column: {name: ville, value: "Casablanca"}
+              - column: {name: code_postal, value: "20100"}
+
+  # Insérer des livreurs de test
+  - changeSet:
+      id: 007-2-insert-test-livreurs
+      author: abdellah
+      changes:
+        - insert:
+            tableName: livreur
+            columns:
+              - column: {name: nom, value: "Alami"}
+              - column: {name: prenom, value: "Hassan"}
+              - column: {name: telephone, value: "0612345671"}
+              - column: {name: vehicule, value: "MOTO"}
+              - column: {name: zone_assignee_id, valueNumeric: 6}
+              - column: {name: actif, valueBoolean: true}
+        - insert:
+            tableName: livreur
+            columns:
+              - column: {name: nom, value: "Benali"}
+              - column: {name: prenom, value: "Fatima"}
+              - column: {name: telephone, value: "0623456782"}
+              - column: {name: vehicule, value: "VOITURE"}
+              - column: {name: zone_assignee_id, valueNumeric: 7}
+              - column: {name: actif, valueBoolean: true}
+        - insert:
+            tableName: livreur
+            columns:
+              - column: {name: nom, value: "Chakir"}
+              - column: {name: prenom, value: "Omar"}
+              - column: {name: telephone, value: "0634567893"}
+              - column: {name: vehicule, value: "CAMIONNETTE"}
+              - column: {name: zone_assignee_id, valueNumeric: 8}
+              - column: {name: actif, valueBoolean: true}
+
+  # Insérer des clients expéditeurs de test
+  - changeSet:
+      id: 007-3-insert-test-clients
+      author: abdellah
+      changes:
+        - insert:
+            tableName: client_expediteur
+            columns:
+              - column: {name: nom, value: "Tazi"}
+              - column: {name: prenom, value: "Karim"}
+              - column: {name: email, value: "karim.tazi@example.com"}
+              - column: {name: telephone, value: "0645678901"}
+              - column: {name: adresse, value: "12 Rue Mohamed V, Casablanca"}
+        - insert:
+            tableName: client_expediteur
+            columns:
+              - column: {name: nom, value: "TechStore"}
+              - column: {name: prenom, value: "Contact"}
+              - column: {name: email, value: "contact@techstore.ma"}
+              - column: {name: telephone, value: "0656789012"}
+              - column: {name: adresse, value: "45 Boulevard Zerktouni, Casablanca"}
+        - insert:
+            tableName: client_expediteur
+            columns:
+              - column: {name: nom, value: "Idrissi"}
+              - column: {name: prenom, value: "Amina"}
+              - column: {name: email, value: "amina.idrissi@example.com"}
+              - column: {name: telephone, value: "0667890123"}
+              - column: {name: adresse, value: "78 Rue Allal Ben Abdellah, Rabat"}
+
+  # Insérer des destinataires de test
+  - changeSet:
+      id: 007-4-insert-test-destinataires
+      author: abdellah
+      changes:
+        - insert:
+            tableName: destinataire
+            columns:
+              - column: {name: nom, value: "Benjelloun"}
+              - column: {name: prenom, value: "Mehdi"}
+              - column: {name: telephone, value: "0678901234"}
+              - column: {name: adresse, value: "23 Rue des Fleurs, Casablanca, 20000"}
+        - insert:
+            tableName: destinataire
+            columns:
+              - column: {name: nom, value: "Naciri"}
+              - column: {name: prenom, value: "Salma"}
+              - column: {name: telephone, value: "0689012345"}
+              - column: {name: adresse, value: "56 Avenue Hassan II, Casablanca, 20100"}
+        - insert:
+            tableName: destinataire
+            columns:
+              - column: {name: nom, value: "Fassi"}
+              - column: {name: prenom, value: "Youssef"}
+              - column: {name: telephone, value: "0690123456"}
+              - column: {name: adresse, value: "89 Rue Ain Sebaa, Casablanca, 20250"}
+
+  # Insérer des produits de test
+  - changeSet:
+      id: 007-5-insert-test-produits
+      author: abdellah
+      changes:
+        - insert:
+            tableName: produit
+            columns:
+              - column: {name: nom, value: "Smartphone Samsung Galaxy"}
+              - column: {name: prix, valueNumeric: 4500.00}
+              - column: {name: poids, valueNumeric: 0.200}
+              - column: {name: categorie, value: "Électronique"}
+        - insert:
+            tableName: produit
+            columns:
+              - column: {name: nom, value: "Laptop Dell XPS"}
+              - column: {name: prix, valueNumeric: 12000.00}
+              - column: {name: poids, valueNumeric: 2.500}
+              - column: {name: categorie, value: "Électronique"}
+        - insert:
+            tableName: produit
+            columns:
+              - column: {name: nom, value: "Chaise de bureau ergonomique"}
+              - column: {name: prix, valueNumeric: 1500.00}
+              - column: {name: poids, valueNumeric: 15.000}
+              - column: {name: categorie, value: "Mobilier"}
+        - insert:
+            tableName: produit
+            columns:
+              - column: {name: nom, value: "Livre 'Clean Code'"}
+              - column: {name: prix, valueNumeric: 350.00}
+              - column: {name: poids, valueNumeric: 0.500}
+              - column: {name: categorie, value: "Livres"}
+        - insert:
+            tableName: produit
+            columns:
+              - column: {name: nom, value: "Montre connectée Apple Watch"}
+              - column: {name: prix, valueNumeric: 3800.00}
+              - column: {name: poids, valueNumeric: 0.050}
+              - column: {name: categorie, value: "Électronique"}
+
+  # Insérer des colis de test
+  - changeSet:
+      id: 007-6-insert-test-colis
+      author: abdellah
+      changes:
+        - insert:
+            tableName: colis
+            columns:
+              - column: {name: numero_suivi, value: "COL-12345ABC"}
+              - column: {name: client_expediteur_id, valueNumeric: 3}
+              - column: {name: destinataire_id, valueNumeric: 3}
+              - column: {name: zone_id, valueNumeric: 6}
+              - column: {name: livreur_id, valueNumeric: 4}
+              - column: {name: poids_total, valueNumeric: 0.200}
+              - column: {name: priorite, value: "NORMALE"}
+              - column: {name: statut, value: "EN_TRANSIT"}
+              - column: {name: ville_destination, value: "Casablanca"}
+              - column: {name: date_livraison_prevue, valueDate: "2024-12-25"}
+              - column: {name: description, value: "Commande électronique urgente"}
+        - insert:
+            tableName: colis
+            columns:
+              - column: {name: numero_suivi, value: "COL-67890DEF"}
+              - column: {name: client_expediteur_id, valueNumeric: 4}
+              - column: {name: destinataire_id, valueNumeric: 4}
+              - column: {name: zone_id, valueNumeric: 8}
+              - column: {name: livreur_id, valueNumeric: 6}
+              - column: {name: poids_total, valueNumeric: 2.500}
+              - column: {name: priorite, value: "URGENTE"}
+              - column: {name: statut, value: "EN_PREPARATION"}
+              - column: {name: ville_destination, value: "Casablanca"}
+              - column: {name: date_livraison_prevue, valueDate: "2024-12-22"}
+              - column: {name: description, value: "Matériel informatique"}
+        - insert:
+            tableName: colis
+            columns:
+              - column: {name: numero_suivi, value: "COL-11223GHI"}
+              - column: {name: client_expediteur_id, valueNumeric: 5}
+              - column: {name: destinataire_id, valueNumeric: 5}
+              - column: {name: zone_id, valueNumeric: 7}
+              - column: {name: poids_total, valueNumeric: 15.000}
+              - column: {name: priorite, value: "NORMALE"}
+              - column: {name: statut, value: "CREE"}
+              - column: {name: ville_destination, value: "Casablanca"}
+              - column: {name: date_livraison_prevue, valueDate: "2024-12-28"}
+              - column: {name: description, value: "Mobilier de bureau"}
+
+  # Insérer les produits dans les colis (relation many-to-many)
+  - changeSet:
+      id: 007-7-insert-test-colis-produits
+      author: abdellah
+      changes:
+        - insert:
+            tableName: colis_produit
+            columns:
+              - column: {name: colis_id, valueNumeric: 1}
+              - column: {name: produit_id, valueNumeric: 4}
+              - column: {name: quantite, valueNumeric: 1}
+              - column: {name: prix_unitaire, valueNumeric: 4500.00}
+        - insert:
+            tableName: colis_produit
+            columns:
+              - column: {name: colis_id, valueNumeric: 2}
+              - column: {name: produit_id, valueNumeric: 5}
+              - column: {name: quantite, valueNumeric: 1}
+              - column: {name: prix_unitaire, valueNumeric: 12000.00}
+        - insert:
+            tableName: colis_produit
+            columns:
+              - column: {name: colis_id, valueNumeric: 3}
+              - column: {name: produit_id, valueNumeric: 6}
+              - column: {name: quantite, valueNumeric: 1}
+              - column: {name: prix_unitaire, valueNumeric: 1500.00}

@@ -11,3 +11,5 @@ databaseChangeLog:
       file: db/changelog/005-add-user-authentication.yaml
   - include:
       file: db/changelog/006-create-permissions-tables.yaml
+  - include:
+      file: db/changelog/007-insert-test-data.yaml

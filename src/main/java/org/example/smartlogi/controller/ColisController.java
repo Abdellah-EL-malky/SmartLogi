@@ -121,7 +121,7 @@ public class ColisController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAuthority('COLIS_DELETE')")
     @Operation(summary = "Supprimer un colis")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         colisService.delete(id);
@@ -164,7 +164,7 @@ public class ColisController {
     }
 
     @PatchMapping("/{id}/statut")
-    @PreAuthorize("hasAnyRole('MANAGER', 'DELIVERY_PERSON')")
+    @PreAuthorize("hasAuthority('COLIS_UPDATE_STATUS')")
     @Operation(summary = "Changer le statut")
     public ResponseEntity<ColisDTO> changerStatut(
             @PathVariable Long id,

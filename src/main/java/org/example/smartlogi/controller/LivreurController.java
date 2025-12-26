@@ -22,7 +22,7 @@ public class LivreurController {
     private final LivreurService livreurService;
 
     @GetMapping
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAuthority('LIVREUR_READ')")
     @Operation(summary = "Lister tous les livreurs")
     public ResponseEntity<List<LivreurDTO>> findAll() {
         List<LivreurDTO> livreurs = livreurService.findAll();

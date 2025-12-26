@@ -22,7 +22,7 @@ public class ZoneController {
     private final ZoneService zoneService;
 
     @GetMapping
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAuthority('ZONE_READ')")
     @Operation(summary = "Lister toutes les zones")
     public ResponseEntity<List<ZoneDTO>> findAll() {
         List<ZoneDTO> zones = zoneService.findAll();

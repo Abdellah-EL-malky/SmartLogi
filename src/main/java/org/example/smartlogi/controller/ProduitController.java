@@ -22,7 +22,7 @@ public class ProduitController {
     private final ProduitService produitService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('MANAGER', 'CLIENT')")
+    @PreAuthorize("hasAuthority('PRODUIT_READ')")
     @Operation(summary = "Lister tous les produits")
     public ResponseEntity<List<ProduitDTO>> findAll() {
         List<ProduitDTO> produits = produitService.findAll();
