@@ -93,7 +93,7 @@ public class ColisController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('MANAGER', 'DELIVERY_PERSON', 'CLIENT')")
+    //@PreAuthorize("hasAnyRole('MANAGER', 'DELIVERY_PERSON', 'CLIENT')")
     @Operation(summary = "Lister tous les colis")
     public ResponseEntity<List<ColisDTO>> findAll(Authentication authentication) {
         String username = authentication.getName();
