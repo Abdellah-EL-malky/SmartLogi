@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    container_name: intellidrop-db
+    environment:
+      POSTGRES_DB: intellidrop_v2_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - intellidrop-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Application Spring Boot
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: intellidrop-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # Configuration de la base de données
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/intellidrop_v2_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+
+      # Configuration JWT
+      JWT_SECRET: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      JWT_EXPIRATION: 86400000
+
+      # Configuration Liquibase
+      SPRING_LIQUIBASE_ENABLED: true
+
+      # Configuration du profil
+      SPRING_PROFILES_ACTIVE: prod
+    ports:
+      - "8080:8080"
+    networks:
+      - intellidrop-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  intellidrop-network:
+    driver: bridge
